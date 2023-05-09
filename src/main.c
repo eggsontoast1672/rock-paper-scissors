@@ -12,7 +12,7 @@ int main(void)
 
     srand(time(NULL));
 
-    printf("Welcome to Rock Paper Scissors! Please refer to the README more information.\n");
+    printf("Welcome to Rock Paper Scissors! Please refer to the README for more information.\n");
     printf("\n");
 
     player_move = rps_player_get_move();
