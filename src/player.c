@@ -13,13 +13,15 @@ RpsMove rps_player_get_move(void)
 {
     char buffer[BUFFER_LENGTH];
     RpsMove move;
+    int parsing_error_occurred;
 
-    printf("Enter your move: ");
-    read_line_internal(buffer, BUFFER_LENGTH);
-    if (parse_move_string_internal(buffer, &move) != 0) {
-        printf("Invalid move.\n");
-        exit(1);
-    }
+    do {
+        printf("Enter your move: ");
+        read_line_internal(buffer, BUFFER_LENGTH);
+        parsing_error_occurred = parse_move_string_internal(buffer, &move);
+        if (parsing_error_occurred)
+            printf("Please enter either 'rock', 'paper', or 'scissors'\n");
+    } while (parsing_error_occurred);
     return move;
 }
 
