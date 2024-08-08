@@ -23,6 +23,24 @@ beat paper, and paper beats rock. I suppose the reasoning is that rock squishes
 scissors, scissors cut paper, and paper wraps rock? Some of those don't make a
 whole ton of sense, but I digress.
 
+## Compiling and Running
+
+You need the following programs to run the code:
+
+* C Compiler
+* Ninja
+* CMake
+
+You can use the following commands to compile and run the code:
+
+```sh
+cmake -S . -B build
+ninja -C build
+build/rps
+```
+
+That's all there is to it!
+
 ## License
 
 This is public domain software. Do with it as you please.

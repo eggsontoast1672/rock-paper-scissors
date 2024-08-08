@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(RockPaperScissors)
 
-set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_C_STANDARD 90)
-set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE include-what-you-use)
+set(CMAKE_C_STANDARD_REQUIRED YES)
+set(CMAKE_C_EXTENSIONS OFF)
 
 add_executable(rps
     src/computer.c
@@ -13,6 +13,4 @@ add_executable(rps
     src/player.c
 )
 
-if(NOT MSVC)
-    target_compile_options(rps PRIVATE -Wall -Werror -Wextra -Wpedantic)
-endif()
+target_compile_options(rps PRIVATE -Wall -Werror -Wextra -Wpedantic)
