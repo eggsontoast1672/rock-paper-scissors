@@ -24,15 +24,9 @@ type GameState {
 
 fn get_win_state(player: Move, computer: Move) -> GameState {
   case player, computer {
-    Rock, Rock -> Draw
-    Paper, Rock -> Win
-    Scissors, Rock -> Loss
-    Rock, Paper -> Loss
-    Paper, Paper -> Draw
-    Scissors, Paper -> Win
-    Rock, Scissors -> Win
-    Paper, Scissors -> Loss
-    Scissors, Scissors -> Draw
+    Rock, Scissors | Paper, Rock | Scissors, Paper -> Win
+    Rock, Rock | Paper, Paper | Scissors, Scissors -> Draw
+    Rock, Paper | Paper, Scissors | Scissors, Rock -> Loss
   }
 }
 
