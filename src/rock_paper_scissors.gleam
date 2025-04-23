@@ -42,7 +42,7 @@ fn get_player_move() -> Option(Move) {
       get_player_move()
     }
     _ -> {
-      io.println("Please enter a valid more, or <c-d> to exit.\n")
+      io.println("Please enter a valid more, or Ctrl+d to exit.\n")
       get_player_move()
     }
   }
