@@ -24,8 +24,9 @@ beat paper, and paper beats rock. I suppose the reasoning is that rock squishes
 scissors, scissors cut paper, and paper wraps rock? Some of those don't make a
 whole ton of sense, but I digress.
 
-In addition to the three move commands, typing `quit` at the prompt will cause
-the program to exit.
+In addition to the three move commands, typing `Ctrl+d` at the prompt will
+cause the program to exit. At that point, you will be able to see some nice end
+game statistics.
 
 ## Compiling and Running
 
