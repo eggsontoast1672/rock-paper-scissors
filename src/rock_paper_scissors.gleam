@@ -32,14 +32,17 @@ fn get_win_state(player: Move, computer: Move) -> GameState {
 }
 
 fn get_player_move() -> Option(Move) {
-  let assert Ok(line) = erlang.get_line("Enter your move: ")
-  case line {
-    "rock\n" -> Some(Rock)
-    "paper\n" -> Some(Paper)
-    "scissors\n" -> Some(Scissors)
-    "quit\n" -> None
+  case erlang.get_line("Enter your move: ") {
+    Ok("rock\n") -> Some(Rock)
+    Ok("paper\n") -> Some(Paper)
+    Ok("scissors\n") -> Some(Scissors)
+    Error(erlang.Eof) -> None
+    Error(erlang.NoData) -> {
+      io.println("An IO error occurred, please try again.\n")
+      get_player_move()
+    }
     _ -> {
-      io.println("Please enter a valid more, or quit to exit.\n")
+      io.println("Please enter a valid more, or <c-d> to exit.\n")
       get_player_move()
     }
   }
@@ -50,6 +53,9 @@ fn get_computer_move() -> Move {
     0 -> Rock
     1 -> Paper
     2 -> Scissors
+
+    // Control flow should never reach this branch, but if it does, that would
+    // indicate that Rock, Paper, and Scissors are not equally likely.
     _ -> panic
   }
 }
@@ -66,19 +72,18 @@ fn play_game(stats: GameStats) -> GameStats {
       io.println("You went " <> move_to_string(player_move))
       io.println("Computer went " <> move_to_string(computer_move) <> "\n")
 
-      let GameStats(games, wins) = stats
       case get_win_state(player_move, computer_move) {
         Win -> {
           io.println("Player wins!\n")
-          play_game(GameStats(games + 1, wins + 1))
+          play_game(GameStats(stats.games + 1, stats.wins + 1))
         }
         Draw -> {
           io.println("It's a tie!\n")
-          play_game(GameStats(games + 1, wins))
+          play_game(GameStats(stats.games + 1, stats.wins))
         }
         Loss -> {
           io.println("Computer wins!\n")
-          play_game(GameStats(games + 1, wins))
+          play_game(GameStats(stats.games + 1, stats.wins))
         }
       }
     }
