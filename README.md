@@ -4,9 +4,10 @@ A silly little rock paper scissors game.
 
 ## Overview
 
-I created this repository a while ago, and then I never did anything with it.
-I'm in my C phase right now and when I found this while scrolling through my
-GitHub, I knew I just had to do something with it.
+I created this repository quite a long time ago. It was originally written in
+C, but since I'm in my Gleam phase right now, I just have to rewrite it in
+Gleam. The implementation strives to be a mostly verbatim rewrite of the C
+version.
 
 ## Rules
 
@@ -25,22 +26,21 @@ whole ton of sense, but I digress.
 
 ## Compiling and Running
 
-You need the following programs to run the code:
-
-* C Compiler
-* Ninja
-* CMake
-
-You can use the following commands to compile and run the code:
+All you need to run the code is the Gleam compiler, which you can most likely
+get through your system's package manager if you're on Linux. If you're on
+Windows or Mac, you probably need to download the compiler from the Gleam
+website. As with all gleam projects, you can use the following command to run
+the code:
 
 ```sh
-cmake -S . -B build
-ninja -C build
-build/rps
+gleam run
 ```
 
 That's all there is to it!
 
 ## License
 
-This is public domain software. Do with it as you please.
+This software is licensed under the MIT license. You can use the code for
+whatever you want, edit it, redistrubite it, sell it, I do not care. All you
+have to do is include this license with the software and not claim that you
+wrote it.
