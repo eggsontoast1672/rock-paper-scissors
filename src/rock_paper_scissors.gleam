@@ -1,6 +1,7 @@
 import gleam/erlang
 import gleam/int
 import gleam/io
+import gleam/option.{type Option, None, Some}
 
 type Move {
   Rock
@@ -30,14 +31,15 @@ fn get_win_state(player: Move, computer: Move) -> GameState {
   }
 }
 
-fn get_player_move() -> Move {
+fn get_player_move() -> Option(Move) {
   let assert Ok(line) = erlang.get_line("Enter your move: ")
   case line {
-    "rock\n" -> Rock
-    "paper\n" -> Paper
-    "scissors\n" -> Scissors
+    "rock\n" -> Some(Rock)
+    "paper\n" -> Some(Paper)
+    "scissors\n" -> Some(Scissors)
+    "quit\n" -> None
     _ -> {
-      io.println("Please enter either 'rock', 'paper', or 'scissors'")
+      io.println("Please enter a valid more, or quit to exit.")
       get_player_move()
     }
   }
@@ -52,20 +54,30 @@ fn get_computer_move() -> Move {
   }
 }
 
+fn play_game() {
+  case get_player_move() {
+    None -> Nil
+    Some(player_move) -> {
+      let computer_move = get_computer_move()
+
+      io.println("You went " <> move_to_string(player_move))
+      io.println("Computer went " <> move_to_string(computer_move) <> "\n")
+
+      case get_win_state(player_move, computer_move) {
+        Win -> io.println("Player wins!\n")
+        Draw -> io.println("It's a tie!\n")
+        Loss -> io.println("Computer wins!\n")
+      }
+
+      play_game()
+    }
+  }
+}
+
 pub fn main() -> Nil {
   io.println(
     "Welcome to Rock Paper Scissors! Please refer to the README for more information.\n",
   )
 
-  let player_move = get_player_move()
-  let computer_move = get_computer_move()
-
-  io.println("You went " <> move_to_string(player_move))
-  io.println("Computer went " <> move_to_string(computer_move) <> "\n")
-
-  case get_win_state(player_move, computer_move) {
-    Win -> io.println("Player wins!")
-    Draw -> io.println("It's a tie!")
-    Loss -> io.println("Computer wins!")
-  }
+  play_game()
 }

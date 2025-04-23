@@ -9,7 +9,7 @@ C, but since I'm in my Gleam phase right now, I just have to rewrite it in
 Gleam. The implementation strives to be a mostly verbatim rewrite of the C
 version.
 
-## Rules
+## Usage
 
 I'm sure most know the rules of Rock Paper Scissors, but just in case you
 don't, here's how it works:
@@ -23,6 +23,9 @@ winner will be determined based on the rule that rock beats scissors, scissors
 beat paper, and paper beats rock. I suppose the reasoning is that rock squishes
 scissors, scissors cut paper, and paper wraps rock? Some of those don't make a
 whole ton of sense, but I digress.
+
+In addition to the three move commands, typing `quit` at the prompt will cause
+the program to exit.
 
 ## Compiling and Running
 
